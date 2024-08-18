@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - P&P Electronics</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .payment-card {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-primary text-white p-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a href="index.html" class="navbar-brand">P&P Electronics</a>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a href="index.html" class="nav-link text-white">Dashboard</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link text-white">About Us</a></li>
+                    <li class="nav-item"><a href="products.html" class="nav-link text-white">Our Products</a></li>
+                    <li class="nav-item"><a href="orders.html" class="nav-link text-white">My Orders</a></li>
+                    <li class="nav-item"><a href="account.html" class="nav-link text-white">Account</a></li>
+                    <li class="nav-item"><a href="cart.html" class="nav-link text-white position-relative">
+                        <img src="images/cart.jpg" alt="Cart" style="width: 24px; height: 24px;">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="payment-card">
+        <h2 class="text-center">Payment</h2>
+        <form id="payment-form">
+            <div class="mb-3">
+                <label for="product" class="form-label">Product Name</label>
+                <input type="text" id="product" class="form-control" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="text" id="price" class="form-control" readonly>
+            </div>
+            <div class="mb-3">
+                <label for="card-number" class="form-label">Card Number</label>
+                <input type="text" id="card-number" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="issue-date" class="form-label">Issue Date</label>
+                <input type="month" id="issue-date" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="expiry-date" class="form-label">Expiry Date</label>
+                <input type="month" id="expiry-date" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="amount" class="form-label">Amount</label>
+                <input type="text" id="amount" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Pay Now</button>
+        </form>
+    </div>
+
+    <script>
+        // Populate payment form with product data from URL
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const productName = urlParams.get('product');
+            const price = urlParams.get('price');
+
+            document.getElementById('product').value = productName;
+            document.getElementById('price').value = `$${price}`;
+            document.getElementById('amount').value = price;
+
+            document.getElementById('payment-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const orderCode = Math.random().toString(36).substring(2, 7).toUpperCase();
+                alert(`Payment successful! Your order code is: ${orderCode}`);
+
+                let orders = JSON.parse(sessionStorage.getItem('orders')) || [];
+                orders.push({ productName, orderCode });
+                sessionStorage.setItem('orders', JSON.stringify(orders));
+
+                window.location.href = 'orders.html';
+            });
+        }
+    </script>
+</body>
+</html>
