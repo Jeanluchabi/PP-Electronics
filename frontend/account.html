@@ -26,6 +26,11 @@
             background: #f7f7f7;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .form-container.active {
+            display: block;
         }
 
         .close-button {
@@ -86,25 +91,30 @@
         .register-link a:hover {
             text-decoration: underline;
         }
+
+        header.navbar {
+            padding: 1rem;
+        }
     </style>
 </head>
 <body>
     <!-- Include Header from main.html -->
-    <header class="bg-primary text-white p-3">
-        <div class="container d-flex justify-content-between align-items-center">
+    <header class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
             <a href="index.html" class="navbar-brand">P&P Electronics</a>
-            <nav>
-                <ul class="nav">
+            <nav class="collapse navbar-collapse">
+                <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a href="index.html" class="nav-link text-white">Dashboard</a></li>
                     <li class="nav-item"><a href="about.html" class="nav-link text-white">About Us</a></li>
                     <li class="nav-item"><a href="products.html" class="nav-link text-white">Our Products</a></li>
                     <li class="nav-item"><a href="orders.html" class="nav-link text-white">My Orders</a></li>
                     <li class="nav-item"><a href="account.html" class="nav-link text-white">Account</a></li>
-                    <li class="nav-item"><a href="cart.html" class="nav-link text-white position-relative">
-                        <img src="images/cart.jpg" alt="Cart" style="width: 24px; height: 24px;">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-                    </a></li>
+                    <li class="nav-item">
+                        <a href="cart.html" class="nav-link text-white position-relative">
+                            <img src="images/cart.jpg" alt="Cart" style="width: 24px; height: 24px;">
+                            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -112,97 +122,90 @@
 
     <!-- Account Content -->
     <main>
-        <section id="account" class="account-section py-5">
-            <div class="container">
-                <div id="account-details" class="form-container">
-                    <!-- Sign-in form -->
-                    <div id="signInForm">
-                        <span class="close-button" onclick="hideForms()">X</span>
-                        <h3 class="form-title">Sign In</h3>
-                        <form action="/login" method="post">
-                            <div class="form-group">
-                                <label for="emailOrPhone">Email or Phone Number:</label>
-                                <input type="text" class="form-control" id="emailOrPhone" name="emailOrPhone" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password:</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
-                            <div class="remember-forget">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="rememberMe">
-                                    <label class="form-check-label" for="rememberMe">Remember me</label>
-                                </div>
-                                <a href="#" onclick="showResetPasswordForm()">Forget Password?</a>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Sign In</button>
-                            <div class="register-link">
-                                <p>Don't have an account? <a href="#" onclick="showRegisterForm()">Register</a></p>
-                            </div>
-                        </form>
-                    </div>
-                    
-                    <!-- Register form -->
-                    <div id="registerForm" class="d-none">
-                        <span class="close-button" onclick="hideForms()">X</span>
-                        <h3 class="form-title">Register</h3>
-                        <form action="/register" method="post">
-                            <div class="form-group">
-                                <label for="fullName">Full Name:</label>
-                                <input type="text" class="form-control" id="fullName" name="fullName" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="email">Email:</label>
-                                <input type="email" class="form-control" id="email" name="email" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone Number:</label>
-                                <input type="tel" class="form-control" id="phone" name="phone" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="dob">Date of Birth:</label>
-                                <input type="date" class="form-control" id="dob" name="dob" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="gender">Gender:</label>
-                                <select class="form-select" id="gender" name="gender" required>
-                                    <option value="" selected disabled>Select Gender</option>
-                                    <option value="male">Male</option>
-                                    <option value="female">Female</option>
-                                    <option value="other">Other</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="password">Password:</label>
-                                <input type="password" class="form-control" id="password" name="password" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="confirmPassword">Confirm Password:</label>
-                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Register</button>
-                            <div class="register-link">
-                                <p>Already have an account? <a href="#" onclick="showSignInForm()">Sign In</a></p>
-                            </div>
-                        </form>
-                    </div>
-
-                    <!-- Reset password form -->
-                    <div id="resetPasswordForm" class="d-none">
-                        <span class="close-button" onclick="showSignInForm()">X</span>
-                        <h3 class="form-title">Reset Password</h3>
-                        <form action="/reset-password" method="post">
-                            <div class="form-group">
-                                <label for="resetEmail">Enter your email:</label>
-                                <input type="email" class="form-control" id="resetEmail" name="resetEmail" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary w-100">Reset</button>
-                        </form>
-                    </div>
-
+        <!-- Sign-in form -->
+        <div class="container form-container active" id="signInForm">
+            <span class="close-button" onclick="hideForms()">X</span>
+            <h2 class="form-title">Sign In</h2>
+            <form action="/login" method="post">
+                <div class="form-group">
+                    <label for="emailOrPhone">Email or Phone Number:</label>
+                    <input type="text" class="form-control" id="emailOrPhone" name="emailOrPhone" required>
                 </div>
-            </div>
-        </section>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="remember-forget">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label" for="rememberMe">Remember me</label>
+                    </div>
+                    <a href="#" onclick="showForm('resetPasswordForm')">Forget Password</a>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+                <div class="register-link">
+                    <p>Don't have an account? <a href="#" onclick="showForm('registerForm')">Register</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Register form -->
+        <div class="container form-container" id="registerForm">
+            <span class="close-button" onclick="hideForms()">X</span>
+            <h2 class="form-title">Register</h2>
+            <form action="/register" method="post">
+                <div class="form-group">
+                    <label for="fullName">Full Name:</label>
+                    <input type="text" class="form-control" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" class="form-control" id="dob" name="dob" required>
+                </div>
+                <div class="form-group">
+                    <label for="gender">Gender:</label>
+                    <select class="form-select" id="gender" name="gender" required>
+                        <option value="" selected disabled>Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Register</button>
+                <div class="register-link">
+                    <p>Already have an account? <a href="#" onclick="showForm('signInForm')">Sign In</a></p>
+                </div>
+            </form>
+        </div>
+
+        <!-- Reset password form -->
+        <div class="container form-container" id="resetPasswordForm">
+            <span class="close-button" onclick="showForm('signInForm')">X</span>
+            <h2 class="form-title">Reset Password</h2>
+            <form action="/reset-password" method="post">
+                <div class="form-group">
+                    <label for="resetEmail">Enter your email:</label>
+                    <input type="email" class="form-control" id="resetEmail" name="resetEmail" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Reset</button>
+            </form>
+        </div>
     </main>
 
     <!-- Include Footer from main.html -->
@@ -218,6 +221,15 @@
         </div>
     </footer>
 
-    <!-- Bootstrap JS and Font Awesome -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap
+    <script>
+        function showForm(formId) {
+            document.querySelectorAll('.form-container').forEach(form => form.classList.remove('active'));
+            document.getElementById(formId).classList.add('active');
+        }
+
+        function hideForms() {
+            document.querySelectorAll('.form-container').forEach(form => form.classList.remove('active'));
+        }
+    </script>
+</body>
+</html>
