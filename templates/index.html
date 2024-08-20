@@ -7,6 +7,9 @@
     <title>P&P Electronics - Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
     <style>
         body,
         html {
@@ -66,7 +69,6 @@
             max-width: 500px;
         }
 
-        /* Ensuring footer remains at the bottom */
         footer {
             position: relative;
             bottom: 0;
@@ -82,7 +84,7 @@
         <!-- Header -->
         <header class="bg-primary text-white p-3">
             <div class="container d-flex justify-content-between align-items-center">
-                <a href="main.html" class="navbar-brand">P&P Electronics</a>
+                <a href="index.html" class="navbar-brand">P&P Electronics</a>
                 <nav>
                     <ul class="nav">
                         <li class="nav-item"><a href="index.html" class="nav-link text-white">Dashboard</a></li>
@@ -90,10 +92,12 @@
                         <li class="nav-item"><a href="products.html" class="nav-link text-white">Our Products</a></li>
                         <li class="nav-item"><a href="orders.html" class="nav-link text-white">My Orders</a></li>
                         <li class="nav-item"><a href="account.html" class="nav-link text-white">Account</a></li>
-                        <li class="nav-item"><a href="cart.html" class="nav-link text-white position-relative">
-                            <img src="images/cart.jpg" alt="Cart" style="width: 24px; height: 24px;">
-                            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-                        </a></li>
+                        <li class="nav-item">
+                            <a href="cart.html" class="nav-link text-white position-relative">
+                                <img src="images/cart.jpg" alt="Cart" style="width: 24px; height: 24px;">
+                                <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -164,83 +168,93 @@
                                 <a href="products.html" class="btn btn-primary w-100">View All Products</a>
                             </div>
                             <div class="col-md-4">
-                                <a href="orders.html" class="btn btn-primary w-100">Track Your Orders</a>
+                                <a href="orders.html" class="btn btn-primary w-100">My Orders</a>
                             </div>
                             <div class="col-md-4">
-                                <a href="account.html" class="btn btn-primary w-100">Manage Your Account</a>
+                                <a href="account.html" class="btn btn-primary w-100">My Account</a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Search Bar -->
                     <div class="search-bar mt-5">
-                        <input id="search-input" type="text" class="form-control" placeholder="Search our products...">
-                        <button id="search-button" class="btn btn-primary mt-3 w-100">Search</button>
+                        <input type="text" id="search-bar" class="form-control" placeholder="Search for products...">
                     </div>
                 </div>
             </section>
         </main>
 
         <!-- Footer -->
-        <footer class="footer bg-dark text-white py-4">
-            <div class="container text-center">
-                <p>&copy; 2024 P&P Electronics. All Rights Reserved.</p>
-                <p>Follow us on 
-                    <a href="#" class="text-white">Facebook</a>, 
-                    <a href="#" class="text-white">Twitter</a>, 
-                    <a href="#" class="text-white">Instagram</a>
-                </p>
-                <p><a href="#" class="text-white" onclick="showGetInTouchForm()">Contact Us</a></p>
-                <p><a href="faq.html" class="text-white">FAQ</a></p>
+        <footer class="footer bg-dark text-white p-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <h5>About Us</h5>
+                        <p>Learn more about our company and what we do.</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Quick Links</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="products.html" class="text-white">Products</a></li>
+                            <li><a href="orders.html" class="text-white">My Orders</a></li>
+                            <li><a href="account.html" class="text-white">Account</a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-4">
+                        <h5>Contact Us</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" id="contact-link" class="text-white">Get in Touch</a></li>
+                            <li><a href="faq.html" class="text-white">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </footer>
 
         <!-- Get in Touch Form -->
         <div id="get-in-touch-form">
             <div class="form-container">
-                <h5 class="text-center mb-4">Get in Touch</h5>
-                <form>
+                <button type="button" class="btn-close float-end" aria-label="Close" onclick="hideContactForm()"></button>
+                <h4>Get in Touch</h4>
+                <form id="contact-form">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Your Name</label>
+                        <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Your Email</label>
+                        <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" id="email" required>
                     </div>
                     <div class="mb-3">
-                        <label for="message" class="form-label">Your Message</label>
-                        <textarea class="form-control" id="message" rows="4" required></textarea>
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" rows="3" required></textarea>
                     </div>
-                    <div class="d-grid">
-                        <button type="submit" class="btn btn-primary">Send Message</button>
-                    </div>
+                    <button type="submit" class="btn btn-primary">Send</button>
                 </form>
-                <button onclick="hideGetInTouchForm()" class="btn btn-danger mt-3 w-100">Close</button>
             </div>
         </div>
     </div>
 
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Function to add items to the cart
+        let cartCount = 0;
+
         function addToCart(productName, price) {
-            let cartCountElement = document.getElementById("cart-count");
-            let cartCount = parseInt(cartCountElement.textContent);
             cartCount++;
-            cartCountElement.textContent = cartCount;
-
-            alert(productName + " has been added to your cart.");
+            document.getElementById('cart-count').textContent = cartCount;
+            // Add further functionality here as needed (e.g., save to local storage or database)
         }
 
-        // Function to show the 'Get in Touch' form
-        function showGetInTouchForm() {
-            document.getElementById("get-in-touch-form").style.display = "flex";
+        function showContactForm() {
+            document.getElementById('get-in-touch-form').style.display = 'flex';
         }
 
-        // Function to hide the 'Get in Touch' form
-        function hideGetInTouchForm() {
-            document.getElementById("get-in-touch-form").style.display = "none";
+        function hideContactForm() {
+            document.getElementById('get-in-touch-form').style.display = 'none';
         }
+
+        document.getElementById('contact-link').addEventListener('click', showContactForm);
     </script>
 </body>
 
