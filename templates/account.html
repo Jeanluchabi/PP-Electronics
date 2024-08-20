@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>P&P Electronics - Account</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
     <style>
         body, html {
             height: 100%;
@@ -98,21 +99,22 @@
         }
     </style>
 </head>
+
 <body>
-    <!-- Include Header from main.html -->
+    <!-- Include Header -->
     <header class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a href="index.html" class="navbar-brand">P&P Electronics</a>
+            <a href="{{ url_for('index') }}" class="navbar-brand">P&P Electronics</a>
             <nav class="collapse navbar-collapse">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a href="index.html" class="nav-link text-white">Dashboard</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link text-white">About Us</a></li>
-                    <li class="nav-item"><a href="products.html" class="nav-link text-white">Our Products</a></li>
-                    <li class="nav-item"><a href="orders.html" class="nav-link text-white">My Orders</a></li>
-                    <li class="nav-item"><a href="account.html" class="nav-link text-white">Account</a></li>
+                    <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link text-white">Dashboard</a></li>
+                    <li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link text-white">About Us</a></li>
+                    <li class="nav-item"><a href="{{ url_for('products') }}" class="nav-link text-white">Our Products</a></li>
+                    <li class="nav-item"><a href="{{ url_for('orders') }}" class="nav-link text-white">My Orders</a></li>
+                    <li class="nav-item"><a href="{{ url_for('account') }}" class="nav-link text-white">Account</a></li>
                     <li class="nav-item">
-                        <a href="cart.html" class="nav-link text-white position-relative">
-                            <img src="images/cart.jpg" alt="Cart" style="width: 24px; height: 24px;">
+                        <a href="{{ url_for('cart') }}" class="nav-link text-white position-relative">
+                            <img src="{{ url_for('static', filename='images/cart.jpg') }}" alt="Cart" style="width: 24px; height: 24px;">
                             <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
                         </a>
                     </li>
@@ -127,7 +129,7 @@
         <div class="container form-container active" id="signInForm">
             <span class="close-button" onclick="hideForms()">X</span>
             <h2 class="form-title">Sign In</h2>
-            <form action="/login" method="post">
+            <form action="{{ url_for('login') }}" method="post">
                 <div class="form-group">
                     <label for="emailOrPhone">Email or Phone Number:</label>
                     <input type="text" class="form-control" id="emailOrPhone" name="emailOrPhone" required>
@@ -154,7 +156,7 @@
         <div class="container form-container" id="registerForm">
             <span class="close-button" onclick="hideForms()">X</span>
             <h2 class="form-title">Register</h2>
-            <form action="/register" method="post">
+            <form action="{{ url_for('register') }}" method="post">
                 <div class="form-group">
                     <label for="fullName">Full Name:</label>
                     <input type="text" class="form-control" id="fullName" name="fullName" required>
@@ -199,7 +201,7 @@
         <div class="container form-container" id="resetPasswordForm">
             <span class="close-button" onclick="showForm('signInForm')">X</span>
             <h2 class="form-title">Reset Password</h2>
-            <form action="/reset-password" method="post">
+            <form action="{{ url_for('reset_password') }}" method="post">
                 <div class="form-group">
                     <label for="resetEmail">Enter your email:</label>
                     <input type="email" class="form-control" id="resetEmail" name="resetEmail" required>
@@ -209,7 +211,7 @@
         </div>
     </main>
 
-    <!-- Include Footer from main.html -->
+    <!-- Include Footer -->
     <footer class="bg-dark text-white py-4 mt-auto">
         <div class="container text-center">
             <p>&copy; 2024 P&P Electronics. All Rights Reserved.</p>
@@ -218,7 +220,7 @@
                 <a href="#" class="text-white">Twitter</a>, 
                 <a href="#" class="text-white">Instagram</a>
             </p>
-            <p><a href="#faq" class="text-white">FAQ</a> | <a href="#contact" class="text-white">Contact Us</a></p>
+            <p><a href="{{ url_for('faq') }}" class="text-white">FAQ</a> | <a href="{{ url_for('contact') }}" class="text-white">Contact Us</a></p>
         </div>
     </footer>
 
@@ -233,4 +235,5 @@
         }
     </script>
 </body>
+
 </html>

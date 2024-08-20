@@ -6,9 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>P&P Electronics - Dashboard</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
     <style>
         body,
@@ -49,7 +47,7 @@
         }
 
         #get-in-touch-form {
-            display: none;
+            display: none; /* Hidden by default */
             background-color: rgba(0, 0, 0, 0.5);
             position: fixed;
             top: 0;
@@ -67,6 +65,17 @@
             border-radius: 10px;
             width: 100%;
             max-width: 500px;
+            position: relative;
+        }
+
+        #get-in-touch-form .form-container .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: transparent;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
         }
 
         footer {
@@ -84,17 +93,17 @@
         <!-- Header -->
         <header class="bg-primary text-white p-3">
             <div class="container d-flex justify-content-between align-items-center">
-                <a href="index.html" class="navbar-brand">P&P Electronics</a>
+                <a href="{{ url_for('index') }}" class="navbar-brand">P&P Electronics</a>
                 <nav>
                     <ul class="nav">
-                        <li class="nav-item"><a href="index.html" class="nav-link text-white">Dashboard</a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link text-white">About Us</a></li>
-                        <li class="nav-item"><a href="products.html" class="nav-link text-white">Our Products</a></li>
-                        <li class="nav-item"><a href="orders.html" class="nav-link text-white">My Orders</a></li>
-                        <li class="nav-item"><a href="account.html" class="nav-link text-white">Account</a></li>
+                        <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link text-white">Dashboard</a></li>
+                        <li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link text-white">About Us</a></li>
+                        <li class="nav-item"><a href="{{ url_for('products') }}" class="nav-link text-white">Our Products</a></li>
+                        <li class="nav-item"><a href="{{ url_for('orders') }}" class="nav-link text-white">My Orders</a></li>
+                        <li class="nav-item"><a href="{{ url_for('account') }}" class="nav-link text-white">Account</a></li>
                         <li class="nav-item">
-                            <a href="cart.html" class="nav-link text-white position-relative">
-                                <img src="images/cart.jpg" alt="Cart" style="width: 24px; height: 24px;">
+                            <a href="{{ url_for('cart') }}" class="nav-link text-white position-relative">
+                                <img src="{{ url_for('static', filename='images/cart.jpg') }}" alt="Cart" style="width: 24px; height: 24px;">
                                 <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
                             </a>
                         </li>
@@ -116,34 +125,34 @@
                         <div class="row row-cols-1 row-cols-md-3 g-4">
                             <div class="col">
                                 <div class="card h-100">
-                                    <img src="images/iphone_15_pro.jpg" class="card-img-top" alt="Apple iPhone 15 Pro Max">
+                                    <img src="{{ url_for('static', filename='images/iphone_15_pro.jpg') }}" class="card-img-top" alt="Apple iPhone 15 Pro Max">
                                     <div class="card-body">
                                         <h5 class="card-title"><strong>Apple iPhone 15 Pro Max</strong></h5>
                                         <p class="card-text">$1,299.00</p>
                                         <button class="btn btn-success w-100 mt-3" onclick="addToCart('Apple iPhone 15 Pro Max', 1299)">Add to Cart</button>
-                                        <a href="payment.html?product=Apple%20iPhone%2015%20Pro%20Max&price=1299" class="btn btn-primary w-100 mt-3">Order Now</a>
+                                        <a href="{{ url_for('payment', product='Apple iPhone 15 Pro Max', price=1299) }}" class="btn btn-primary w-100 mt-3">Order Now</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="card h-100">
-                                    <img src="images/samsung-galaxy-s24.jpg" class="card-img-top" alt="Samsung Galaxy S24 Ultra">
+                                    <img src="{{ url_for('static', filename='images/samsung-galaxy-s24.jpg') }}" class="card-img-top" alt="Samsung Galaxy S24 Ultra">
                                     <div class="card-body">
                                         <h5 class="card-title"><strong>Samsung Galaxy S24 Ultra</strong></h5>
                                         <p class="card-text">$1,199.00</p>
                                         <button class="btn btn-success w-100 mt-3" onclick="addToCart('Samsung Galaxy S24 Ultra', 1199)">Add to Cart</button>
-                                        <a href="payment.html?product=Samsung%20Galaxy%20S24%20Ultra&price=1199" class="btn btn-primary w-100 mt-3">Order Now</a>
+                                        <a href="{{ url_for('payment', product='Samsung Galaxy S24 Ultra', price=1199) }}" class="btn btn-primary w-100 mt-3">Order Now</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="card h-100">
-                                    <img src="images/Google-Pixel-9.jpg" class="card-img-top" alt="Google Pixel 9 Pro XL">
+                                    <img src="{{ url_for('static', filename='images/Google-Pixel-9.jpg') }}" class="card-img-top" alt="Google Pixel 9 Pro XL">
                                     <div class="card-body">
                                         <h5 class="card-title"><strong>Google Pixel 9 Pro XL</strong></h5>
                                         <p class="card-text">$1,099.00</p>
                                         <button class="btn btn-success w-100 mt-3" onclick="addToCart('Google Pixel 9 Pro XL', 1099)">Add to Cart</button>
-                                        <a href="payment.html?product=Google%20Pixel%209%20Pro%20XL&price=1099" class="btn btn-primary w-100 mt-3">Order Now</a>
+                                        <a href="{{ url_for('payment', product='Google Pixel 9 Pro XL', price=1099) }}" class="btn btn-primary w-100 mt-3">Order Now</a>
                                     </div>
                                 </div>
                             </div>
@@ -154,9 +163,9 @@
                     <div class="latest-news mt-5">
                         <h3 class="text-center mb-4">Latest News</h3>
                         <ul class="list-group">
-                            <li class="list-group-item"><a href="apple-iphone-15.html">Apple releases new iPhone 15 Pro Max with enhanced features.</a></li>
-                            <li class="list-group-item"><a href="samsung-galaxy-s24.html">Samsung unveils Galaxy S24 Ultra with advanced camera technology.</a></li>
-                            <li class="list-group-item"><a href="google-pixel-9.html">Google launches Pixel 9 Pro XL, pushing the boundaries of AI integration.</a></li>
+                            <li class="list-group-item"><a href="{{ url_for('apple_iphone_15') }}">Apple releases new iPhone 15 Pro Max with enhanced features.</a></li>
+                            <li class="list-group-item"><a href="{{ url_for('samsung_galaxy_s24_ultra') }}">Samsung unveils Galaxy S24 Ultra with advanced camera technology.</a></li>
+                            <li class="list-group-item"><a href="{{ url_for('google_pixel_9_pro_xl') }}">Google announces Pixel 9 Pro XL with cutting-edge features.</a></li>
                         </ul>
                     </div>
 
@@ -165,13 +174,13 @@
                         <h3 class="text-center mb-4">Quick Links</h3>
                         <div class="row">
                             <div class="col-md-4">
-                                <a href="products.html" class="btn btn-primary w-100">View All Products</a>
+                                <a href="{{ url_for('products') }}" class="btn btn-primary w-100">View All Products</a>
                             </div>
                             <div class="col-md-4">
-                                <a href="orders.html" class="btn btn-primary w-100">My Orders</a>
+                                <a href="{{ url_for('orders') }}" class="btn btn-primary w-100">My Orders</a>
                             </div>
                             <div class="col-md-4">
-                                <a href="account.html" class="btn btn-primary w-100">My Account</a>
+                                <a href="{{ url_for('account') }}" class="btn btn-primary w-100">My Account</a>
                             </div>
                         </div>
                     </div>
@@ -185,76 +194,58 @@
         </main>
 
         <!-- Footer -->
-        <footer class="footer bg-dark text-white p-4">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-4">
-                        <h5>About Us</h5>
-                        <p>Learn more about our company and what we do.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h5>Quick Links</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="products.html" class="text-white">Products</a></li>
-                            <li><a href="orders.html" class="text-white">My Orders</a></li>
-                            <li><a href="account.html" class="text-white">Account</a></li>
-                        </ul>
-                    </div>
-                    <div class="col-md-4">
-                        <h5>Contact Us</h5>
-                        <ul class="list-unstyled">
-                            <li><a href="#" id="contact-link" class="text-white">Get in Touch</a></li>
-                            <li><a href="faq.html" class="text-white">FAQ</a></li>
-                        </ul>
+        <footer class="footer bg-dark text-white py-3">
+            <div class="container text-center">
+                <p>&copy; 2024 P&P Electronics. All rights reserved.</p>
+                <a href="#" id="contact-link">Contact Us</a>
+                <div id="get-in-touch-form">
+                    <div class="form-container">
+                        <button class="close-btn" onclick="closeContactForm()">&times;</button>
+                        <h4>Get in Touch</h4>
+                        <form id="contact-form">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="name" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Message</label>
+                                <textarea class="form-control" id="message" rows="4" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Send</button>
+                        </form>
                     </div>
                 </div>
             </div>
         </footer>
-
-        <!-- Get in Touch Form -->
-        <div id="get-in-touch-form">
-            <div class="form-container">
-                <button type="button" class="btn-close float-end" aria-label="Close" onclick="hideContactForm()"></button>
-                <h4>Get in Touch</h4>
-                <form id="contact-form">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" id="message" rows="3" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send</button>
-                </form>
-            </div>
-        </div>
     </div>
 
-    <!-- JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        let cartCount = 0;
-
         function addToCart(productName, price) {
+            let cartCount = parseInt(document.getElementById('cart-count').textContent) || 0;
             cartCount++;
             document.getElementById('cart-count').textContent = cartCount;
-            // Add further functionality here as needed (e.g., save to local storage or database)
+            // You might want to implement further functionality to add products to the cart
         }
 
-        function showContactForm() {
-            document.getElementById('get-in-touch-form').style.display = 'flex';
-        }
-
-        function hideContactForm() {
+        function closeContactForm() {
             document.getElementById('get-in-touch-form').style.display = 'none';
         }
 
-        document.getElementById('contact-link').addEventListener('click', showContactForm);
+        document.getElementById('contact-link').addEventListener('click', function() {
+            document.getElementById('get-in-touch-form').style.display = 'flex';
+        });
+
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Handle form submission here
+            alert('Message sent successfully!');
+            closeContactForm();
+        });
     </script>
 </body>
 

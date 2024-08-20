@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +6,7 @@
     <title>P&P Electronics - About Us</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
     <style>
         body, html {
             height: 100%;
@@ -53,22 +52,24 @@
     </style>
 </head>
 <body>
-    <!-- Include Header from main.html -->
+    <!-- Include Header -->
     <header class="bg-primary text-white p-3">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="index.html" class="navbar-brand">P&P Electronics</a>
+            <a href="{{ url_for('index') }}" class="navbar-brand">P&P Electronics</a>
             <nav>
                 <ul class="nav">
-                    <li class="nav-item"><a href="index.html" class="nav-link text-white">Dashboard</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link text-white">About Us</a></li>
-                    <li class="nav-item"><a href="products.html" class="nav-link text-white">Our Products</a></li>
-                    <li class="nav-item"><a href="orders.html" class="nav-link text-white">My Orders</a></li>
-                    <li class="nav-item"><a href="account.html" class="nav-link text-white">Account</a></li>
-                    <li class="nav-item"><a href="cart.html" class="nav-link text-white position-relative">
-                        <img src="images/cart.jpg" alt="Cart" style="width: 24px; height: 24px;">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-                    </a></li>
+                    <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link text-white">Dashboard</a></li>
+                    <li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link text-white">About Us</a></li>
+                    <li class="nav-item"><a href="{{ url_for('products') }}" class="nav-link text-white">Our Products</a></li>
+                    <li class="nav-item"><a href="{{ url_for('orders') }}" class="nav-link text-white">My Orders</a></li>
+                    <li class="nav-item"><a href="{{ url_for('account') }}" class="nav-link text-white">Account</a></li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('cart') }}" class="nav-link text-white position-relative">
+                            <img src="{{ url_for('static', filename='images/cart.jpg') }}" alt="Cart" style="width: 24px; height: 24px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -80,7 +81,7 @@
             <div class="container">
                 <h2 class="text-center mb-4">About Us</h2>
                 <p class="text-center">
-                    P&P Electronics is committed to providing high-quality electronic products to our customers. Our mission is to offer a wide range of electronics, from the latest smartphones to top-of-the-line home entertainment systems. We pride ourselves on our customer service and strive to exceed customer expectations by offering the best products at competitive prices. Our team is passionate about technology and works tirelessly to bring the latest innovations to our valued customers. Join us in our journey to bring the future of electronics to your fingertips.
+                    <strong> P&P Electronics is committed to providing high-quality electronic products to our customers. Our mission is to offer a wide range of electronics, from the latest smartphones to top-of-the-line home entertainment systems. We pride ourselves on our customer service and strive to exceed customer expectations by offering the best products at competitive prices. Our team is passionate about technology and works tirelessly to bring the latest innovations to our valued customers. Join us in our journey to bring the future of electronics to your fingertips.</strong>
                 </p>
                 <div class="social-media-icons">
                     <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
@@ -91,11 +92,11 @@
         </section>
     </main>
 
-    <!-- Include Footer from main.html -->
+    <!-- Include Footer -->
     <footer class="bg-dark text-white py-4">
         <div class="container text-center">
             <p>&copy; 2024 P&P Electronics. All Rights Reserved.</p>
-            <p><a href="#faq" class="text-white">FAQ</a> | <a href="#contact" class="text-white">Contact Us</a></p>
+            <p><a href="{{ url_for('faq') }}" class="text-white">FAQ</a> | <a href="{{ url_for('contact') }}" class="text-white">Contact Us</a></p>
         </div>
     </footer>
 

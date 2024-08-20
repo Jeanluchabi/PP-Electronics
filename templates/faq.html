@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
         .faq-section {
             margin-top: 50px;
         }
+
         .faq-question {
             cursor: pointer;
             background-color: #f8f9fa;
@@ -20,9 +22,11 @@
             border-radius: 5px;
             transition: background-color 0.3s ease;
         }
+
         .faq-question:hover {
             background-color: #e9ecef;
         }
+
         .faq-answer {
             display: none;
             padding: 10px;
@@ -32,29 +36,33 @@
             transition: max-height 0.3s ease, padding 0.3s ease;
             overflow: hidden;
         }
+
         .faq-answer.show {
             display: block;
-            max-height: 200px; /* Adjust as needed */
+            max-height: 200px;
             padding: 15px;
         }
     </style>
 </head>
+
 <body>
     <header class="bg-primary text-white p-3">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="index.html" class="navbar-brand">P&P Electronics</a>
+            <a href="{{ url_for('index') }}" class="navbar-brand">P&P Electronics</a>
             <nav>
                 <ul class="nav">
-                    <li class="nav-item"><a href="index.html" class="nav-link text-white">Dashboard</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link text-white">About Us</a></li>
-                    <li class="nav-item"><a href="products.html" class="nav-link text-white">Our Products</a></li>
-                    <li class="nav-item"><a href="orders.html" class="nav-link text-white">My Orders</a></li>
-                    <li class="nav-item"><a href="account.html" class="nav-link text-white">Account</a></li>
-                    <li class="nav-item"><a href="cart.html" class="nav-link text-white position-relative">
-                        <img src="images/cart.jpg" alt="Cart" style="width: 24px; height: 24px;">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-                    </a></li>
+                    <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link text-white">Dashboard</a></li>
+                    <li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link text-white">About Us</a></li>
+                    <li class="nav-item"><a href="{{ url_for('products') }}" class="nav-link text-white">Our Products</a></li>
+                    <li class="nav-item"><a href="{{ url_for('orders') }}" class="nav-link text-white">My Orders</a></li>
+                    <li class="nav-item"><a href="{{ url_for('account') }}" class="nav-link text-white">Account</a></li>
+                    <li class="nav-item">
+                        <a href="{{ url_for('cart') }}" class="nav-link text-white position-relative">
+                            <img src="{{ url_for('static', filename='images/cart.jpg') }}" alt="Cart" style="width: 24px; height: 24px;">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
@@ -110,7 +118,7 @@
             <div id="faq-answer-5" class="faq-answer">
                 <p>Orders can be canceled or modified within 24 hours of placing them. After this period, the order may have already been processed, and we might not be able to make changes. Please contact customer service as soon as possible for assistance.</p>
             </div>
-            <p><a href="index.html" class="btn btn-primary">Back to Home</a></p>
+            <p><a href="{{ url_for('index') }}" class="btn btn-primary">Back to Home</a></p>
         </div>
     </div>
 
@@ -131,4 +139,5 @@
         }
     </script>
 </body>
+
 </html>

@@ -71,16 +71,16 @@
     <!-- Include Header from main.html -->
     <header class="bg-primary text-white p-3">
         <div class="container d-flex justify-content-between align-items-center">
-            <a href="index.html" class="navbar-brand">P&P Electronics</a>
+            <a href="{{ url_for('index') }}" class="navbar-brand">P&P Electronics</a>
             <nav>
                 <ul class="nav">
-                    <li class="nav-item"><a href="index.html" class="nav-link text-white">Dashboard</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link text-white">About Us</a></li>
-                    <li class="nav-item"><a href="products.html" class="nav-link text-white">Our Products</a></li>
-                    <li class="nav-item"><a href="orders.html" class="nav-link text-white">My Orders</a></li>
-                    <li class="nav-item"><a href="account.html" class="nav-link text-white">Account</a></li>
+                    <li class="nav-item"><a href="{{ url_for('index') }}" class="nav-link text-white">Dashboard</a></li>
+                    <li class="nav-item"><a href="{{ url_for('about') }}" class="nav-link text-white">About Us</a></li>
+                    <li class="nav-item"><a href="{{ url_for('products') }}" class="nav-link text-white">Our Products</a></li>
+                    <li class="nav-item"><a href="{{ url_for('orders') }}" class="nav-link text-white">My Orders</a></li>
+                    <li class="nav-item"><a href="{{ url_for('account') }}" class="nav-link text-white">Account</a></li>
                     <li class="nav-item">
-                        <a href="cart.html" class="cart-icon">
+                        <a href="{{ url_for('cart') }}" class="cart-icon">
                             <i class="fas fa-shopping-cart"></i>
                             <span id="cart-count" class="badge">0</span>
                         </a>
@@ -99,7 +99,7 @@
                     <!-- Product Cards -->
                     <div class="col">
                         <div class="product-card">
-                            <img src="images/iphone_15_pro.jpg" alt="Apple iPhone 15 Pro Max" class="img-fluid">
+                            <img src="{{ url_for('static', filename='images/iphone_15_pro.jpg') }}" alt="Apple iPhone 15 Pro Max" class="img-fluid">
                             <div class="product-card-body">
                                 <h5>Apple iPhone 15 Pro Max</h5>
                                 <p>$1,299.00</p>
@@ -109,7 +109,7 @@
                     </div>
                     <div class="col">
                         <div class="product-card">
-                            <img src="images/samsung-galaxy-s24.jpg" alt="Samsung Galaxy S24 Ultra" class="img-fluid">
+                            <img src="{{ url_for('static', filename='images/samsung-galaxy-s24.jpg') }}" alt="Samsung Galaxy S24 Ultra" class="img-fluid">
                             <div class="product-card-body">
                                 <h5>Samsung Galaxy S24 Ultra</h5>
                                 <p>$1,199.00</p>
@@ -119,7 +119,7 @@
                     </div>
                     <div class="col">
                         <div class="product-card">
-                            <img src="images/Google-Pixel-9.jpg" alt="Google Pixel 9 Pro XL" class="img-fluid">
+                            <img src="{{ url_for('static', filename='images/Google-Pixel-9.jpg') }}" alt="Google Pixel 9 Pro XL" class="img-fluid">
                             <div class="product-card-body">
                                 <h5>Google Pixel 9 Pro XL</h5>
                                 <p>$1,099.00</p>
@@ -129,7 +129,7 @@
                     </div>
                     <div class="col">
                         <div class="product-card">
-                            <img src="images/modern-guitar.jpg" alt="Modern Acoustic Guitar" class="img-fluid">
+                            <img src="{{ url_for('static', filename='images/modern-guitar.jpg') }}" alt="Modern Acoustic Guitar" class="img-fluid">
                             <div class="product-card-body">
                                 <h5>Modern Acoustic Guitar</h5>
                                 <p>$999.00</p>
@@ -139,7 +139,7 @@
                     </div>
                     <div class="col">
                         <div class="product-card">
-                            <img src="images/jbl.jpg" alt="JBL Speakers" class="img-fluid">
+                            <img src="{{ url_for('static', filename='images/jbl.jpg') }}" alt="JBL Speakers" class="img-fluid">
                             <div class="product-card-body">
                                 <h5>JBL Speakers</h5>
                                 <p>$299.00</p>
@@ -149,7 +149,7 @@
                     </div>
                     <div class="col">
                         <div class="product-card">
-                            <img src="images/watch-series-9-with-dual-straps.jpg" alt="Watch Series 9 with Dual Straps" class="img-fluid">
+                            <img src="{{ url_for('static', filename='images/watch-series-9-with-dual-straps.jpg') }}" alt="Watch Series 9 with Dual Straps" class="img-fluid">
                             <div class="product-card-body">
                                 <h5>Watch Series 9 with Dual Straps</h5>
                                 <p>$499.00</p>
@@ -175,7 +175,7 @@
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="button" class="btn btn-primary add-to-cart-modal">Add to Cart</button>
-                        <a href="payment.html" class="btn btn-primary">Order Now</a>
+                        <a href="{{ url_for('payment') }}" class="btn btn-primary">Order Now</a>
                     </div>
                 </div>
             </div>
@@ -191,55 +191,12 @@
                 <a href="#" class="text-white">Twitter</a>,
                 <a href="#" class="text-white">Instagram</a>
             </p>
-            <p><a href="faq.html" class="text-white">FAQ</a> | <a href="#contact" class="text-white">Contact Us</a></p>
+            <p><a href="{{ url_for('faq') }}" class="text-white">FAQ</a> | <a href="#contact" class="text-white">Contact Us</a></p>
         </div>
     </footer>
 
-    <!-- Bootstrap JS and Font Awesome -->
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script>
-        // JavaScript to handle Add to Cart functionality and Modal interactions
-        document.addEventListener('DOMContentLoaded', function () {
-            const cartCountElement = document.getElementById('cart-count');
-            let cartCount = 0;
-
-            // Update cart count
-            function updateCartCount() {
-                cartCountElement.textContent = cartCount;
-            }
-
-            // Add to Cart buttons in product cards
-            document.querySelectorAll('.learn-more').forEach(button => {
-                button.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    const productName = button.getAttribute('data-product');
-                    const productPrice = button.getAttribute('data-price');
-                    const modalBody = document.querySelector('#productModal .modal-body');
-                    modalBody.innerHTML = `<p>Details about ${productName}...</p><p>Price: $${productPrice}</p>`;
-                });
-            });
-
-            // Modal - Load Product Details
-            const productModal = document.getElementById('productModal');
-            productModal.addEventListener('show.bs.modal', function (event) {
-                const button = event.relatedTarget; // Button that triggered the modal
-                const productName = button.getAttribute('data-product');
-                const productPrice = button.getAttribute('data-price');
-                const modalBody = productModal.querySelector('.modal-body');
-                modalBody.innerHTML = `<p>Details about ${productName}...</p><p>Price: $${productPrice}</p>`;
-            });
-
-            // Add to Cart button in modal
-            document.querySelector('.add-to-cart-modal').addEventListener('click', function () {
-                cartCount++;
-                updateCartCount();
-                const modal = bootstrap.Modal.getInstance(productModal);
-                modal.hide();
-            });
-        });
-    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

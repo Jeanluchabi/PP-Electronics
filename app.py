@@ -4,7 +4,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import datetime
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'your_secret_key'  # Change this to a real secret key
+app.config['SECRET_KEY'] = '44acaa393a0b50fc3e123a7d6f3f561cf616b0b005896fcd4b84db0d20cb0b05'  # Change this to a real secret key
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///pnp_electronics.db'
 db = SQLAlchemy(app)
 
@@ -18,8 +18,8 @@ class User(db.Model):
     gender = db.Column(db.String(10), nullable=False)
     password = db.Column(db.String(100), nullable=False)
 
-# Initialize the database (Run this once to create the database)
-@app.before_first_request
+# Initialize the database
+@app.before_request
 def create_tables():
     db.create_all()
 
@@ -87,7 +87,6 @@ def faq():
 
 @app.route('/product/<product_name>')
 def product(product_name):
-    # Ensure that the product page exists in the templates folder
     try:
         return render_template(f'{product_name}.html')
     except:
@@ -97,10 +96,24 @@ def product(product_name):
 def payment():
     return render_template('payment.html')
 
+# Example product routes
+@app.route('/apple-iphone-15')
+def apple_iphone_15():
+    return render_template('apple-iphone-15.html')
+
+@app.route('/samsung-galaxy-s24-ultra')
+def samsung_galaxy_s24_ultra():
+    return render_template('samsung-galaxy-s24-ultra.html')
+
+@app.route('/google-pixel-9-pro-xl')
+def google_pixel_9_pro_xl():
+    return render_template('google-pixel-9-pro-xl.html')
+
 # Error handling
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5005)  # Use a different port if needed
+
